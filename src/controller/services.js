@@ -287,10 +287,17 @@ const Services = {
             obj.title = $(".venutama > h1").text();
             obj.thumb = $(".cukder > img").attr('src'); // Perbaikan: Menggunakan attr('src') untuk mendapatkan URL gambar
             obj.date = $(".kategoz").text().replace(`Posted by aoichi`, "").replace(`   `, ""); // Perbaikan: Menggunakan trim() untuk menghilangkan spasi kosong dan text() untuk mendapatkan teks tanggal episode
-            obj.desc = $(".infozingle").text();
             obj.baseUrl = url;
             obj.id = url.replace(baseUrl, ""); // Perbaikan: Menggunakan baseUrl untuk menggantikan url.baseUrl
             obj.streamLink = streamElement.find(".responsive-embed-stream > iframe").attr("src");
+            obj.desc = []
+            let detail = []
+                infoElement.each((index, el) => {
+                    $(el).find(".infozingle >  p").each((index, el) => {
+                        detail.push($(el).text())
+                    })
+                    desc.detail = detail
+                })
             obj.relative = []
             let link_ref, title_ref
             $(".flir > a").each((index, el) => {
