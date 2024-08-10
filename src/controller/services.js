@@ -290,25 +290,27 @@ const Services = {
             obj.baseUrl = url;
             obj.id = url.replace(baseUrl, ""); // Perbaikan: Menggunakan baseUrl untuk menggantikan url.baseUrl
             obj.streamLink = streamElement.find(".responsive-embed-stream > iframe").attr("src");
-            obj.desc = []
-            let detail = []
-                infoElement.each((index, el) => {
-                    $(el).find(".infozingle >  p").each((index, el) => {
-                        detail.push($(el).text())
-                    })
-                    desc.detail = detail
-                })
-            obj.relative = []
-            let link_ref, title_ref
+            obj.desc = [];
+            let detail = [];
+            infoElement.each((index, el) => {
+                $(el).find(".infozingle > p").each((index, el) => {
+                    detail.push($(el).text());
+                });
+                obj.desc.push({
+                    detail: detail
+                });
+                detail = []; // Reset detail array for each infoElement
+            });
+            obj.relative = [];
+            let link_ref, title_ref;
             $(".flir > a").each((index, el) => {
-                title_ref = $(el).text()
-                link_ref = $(el).attr("href").replace(`${baseUrl}/anime/`, "").replace(`${baseUrl}/episode/`, "").replace("/", "")
-    
+                title_ref = $(el).text();
+                link_ref = $(el).attr("href").replace(`${baseUrl}/anime/`, "").replace(`${baseUrl}/episode/`, "").replace("/", "");
                 obj.relative.push({
                     title_ref,
                     link_ref
-                })
-            })
+                });
+            });
             
             obj.list_episode = []
             let list_episode_title, list_episode_endpoint
