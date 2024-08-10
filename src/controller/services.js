@@ -337,20 +337,9 @@ const Services = {
                 streaming2.push({
                     driver: driver,
                     link: "/api/v1/streaming/" + $(v).find('a').data().content
+                    
                 });
-                const curl = require('curl');
-                const { Curl } = curl;
-                const c = new Curl();
-                c.setOpt(Curl.option.URL, "anime-three-nu.vercel.app/" + $(v).find('a').data().content);
-                c.setOpt(Curl.option.RETURNTRANSFER, 1);
-                c.on('end', function(statusCode, data, headers) {
-                    console.log(data);
-                    $urlstreams = JSON.parse(data);
-                });
-                c.on('error', function(err) {
-                    console.error(err);
-                });
-                c.perform();
+                
             })
 
             $('.mirrorstream > .m720p > li').each(async(k, v) => {               
