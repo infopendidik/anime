@@ -285,8 +285,9 @@ const Services = {
             const streamElement = $("#lightsVideo").find("#embed_holder");
             const obj = {};
             obj.title = $(".venutama > h1").text();
+            obj.thumb = $(".cukder > img").attr('src'); // Perbaikan: Menggunakan attr('src') untuk mendapatkan URL gambar
             obj.baseUrl = url;
-            obj.id = url.replace(url.baseUrl, "");
+            obj.id = url.replace(baseUrl, ""); // Perbaikan: Menggunakan baseUrl untuk menggantikan url.baseUrl
             obj.streamLink = streamElement.find(".responsive-embed-stream > iframe").attr("src");
             obj.relative = []
             let link_ref, title_ref
@@ -347,9 +348,9 @@ const Services = {
                 });
             })
 
-            obj.mirror_embed1 = { quality: '360p', straming: streaming1 };
-            obj.mirror_embed2 = { quality: '480p', straming: streaming2 };
-            obj.mirror_embed3 = { quality: '720p', straming: streaming3 };
+            obj.mirror_embed1 = { quality: '360p', streaming: streaming1 }; // Perbaikan: Mengubah 'straming' menjadi 'streaming'
+            obj.mirror_embed2 = { quality: '480p', streaming: streaming2 };
+            obj.mirror_embed3 = { quality: '720p', streaming: streaming3 };
 
             let low_quality;
             let medium_quality;
