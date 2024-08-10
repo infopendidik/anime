@@ -286,7 +286,7 @@ const Services = {
             const obj = {};
             obj.title = $(".venutama > h1").text();
             obj.thumb = $(".cukder > img").attr('src'); // Perbaikan: Menggunakan attr('src') untuk mendapatkan URL gambar
-            obj.date = $(".kategoz > span").find("Release").text().trim(); // Perbaikan: Menggunakan trim() untuk menghilangkan spasi kosong dan text() untuk mendapatkan teks tanggal episode
+            obj.date = $(".kategoz > i.fa fa-clock-o >span").text() // Perbaikan: Menggunakan trim() untuk menghilangkan spasi kosong dan text() untuk mendapatkan teks tanggal episode
             obj.baseUrl = url;
             obj.id = url.replace(baseUrl, ""); // Perbaikan: Menggunakan baseUrl untuk menggantikan url.baseUrl
             obj.streamLink = streamElement.find(".responsive-embed-stream > iframe").attr("src");
@@ -320,6 +320,7 @@ const Services = {
             let streaming1 = [];
             let streaming2 = [];
             let streaming3 = [];
+           
 
             $('#embed_holder > div.mirrorstream > ul.m360p > li').each((k, v) => {               
                 let driver = $(v).text()
