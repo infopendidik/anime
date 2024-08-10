@@ -286,7 +286,7 @@ const Services = {
             const obj = {};
             obj.title = $(".venutama > h1").text();
             obj.thumb = $(".cukder > img").attr('src'); // Perbaikan: Menggunakan attr('src') untuk mendapatkan URL gambar
-            obj.episode_date = $(".kategoz > i class='fa fa-clock-o'").find("span").text(); // Perbaikan: Menggunakan text() untuk mendapatkan teks tanggal episode
+            obj.date = $(".kategoz > i class='fa fa-clock-o'").find("span").text(); // Perbaikan: Menggunakan text() untuk mendapatkan teks tanggal episode
             obj.baseUrl = url;
             obj.id = url.replace(baseUrl, ""); // Perbaikan: Menggunakan baseUrl untuk menggantikan url.baseUrl
             obj.streamLink = streamElement.find(".responsive-embed-stream > iframe").attr("src");
