@@ -291,15 +291,8 @@ const Services = {
             obj.id = url.replace(baseUrl, ""); // Perbaikan: Menggunakan baseUrl untuk menggantikan url.baseUrl
             obj.streamLink = streamElement.find(".responsive-embed-stream > iframe").attr("src");
             obj.desc = [];
-            let detail = [];
-            infoElement.each((index, el) => {
-                $(el).find(".infozingle > p").each((index, el) => {
-                    detail.push($(el).text());
-                });
-                obj.desc.push({
-                    detail: detail
-                });
-                detail = []; // Reset detail array for each infoElement
+            $(".infozingle > p").each((index, el) => {
+                obj.desc.push($(el).text()); // Perbaikan: Menggunakan push untuk menambahkan detail ke dalam array obj.desc
             });
             obj.relative = [];
             let link_ref, title_ref;
