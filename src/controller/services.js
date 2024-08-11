@@ -305,19 +305,20 @@ const Services = {
                     link_ref
                 });
             });
-            obj.list_episode = [];
-            let list_judul = $(".venutama > h1").text();
-            let list_thumb = $(".cukder > img").attr('src');
+            
+            obj.list_episode = []
+            let list_episode_title, list_episode_endpoint, list_judul, list_thumb
             $("#selectcog > option").each((index, el) => {
-                let list_episode_title = $(el).text();
-                let list_episode_endpoint = $(el).attr("value").replace(`${baseUrl}/episode/`, "").replace("/", "");
+                list_judul = $(".venutama > h1").text()
+                list_thumb = $(".cukder > img").attr('src')
+                list_episode_title = $(el).text()
+                list_episode_endpoint = $(el).attr("value").replace(`${baseUrl}/episode/`, "").replace("/", "")
                 obj.list_episode.push({
                     list_episode_title,
                     list_episode_endpoint,
                     list_judul,
                     list_thumb
-                });
-            });
+                })
             })
             obj.list_episode.shift()
             const streamLinkResponse = streamElement.find("iframe").attr("src");
