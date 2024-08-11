@@ -312,7 +312,7 @@ const Services = {
                 list_thumb = $(".cukder > img").attr('src')
                 list_episode_title = $(el).text()
                 list_episode_endpoint = $(el).attr("value").replace(`${baseUrl}/episode/`, "").replace("/", "")
-                list_judul = list_episode_endpoint.replace("-", " ")
+                list_judul = list_episode_endpoint.replace(/-/g, " ")
                 obj.list_episode.push({
                     list_episode_title,
                     list_episode_endpoint,
