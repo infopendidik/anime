@@ -289,7 +289,6 @@ const Services = {
             obj.date = $(".kategoz").text().replace(`Posted by aoichi`, "").replace(`   `, ""); // Perbaikan: Menggunakan trim() untuk menghilangkan spasi kosong dan text() untuk mendapatkan teks tanggal episode
             obj.baseUrl = url;
             obj.id = url.replace(baseUrl, "");
-            obj.idanime = $(".alert > li >a").attr('href').replace(baseUrl + '/anime/', '').replace('/', ''); 
             obj.keywords = $(".keying").text();
             obj.streamLink = streamElement.find(".responsive-embed-stream > iframe").attr("src");
             obj.desc = [];
@@ -308,10 +307,9 @@ const Services = {
             });
             
             obj.list_episode = []
-            let list_episode_title, list_episode_endpoint, list_judul, list_thumb, list_date
+            let list_episode_title, list_episode_endpoint, list_judul, list_thumb
             $("#selectcog > option").each((index, el) => {
                 list_thumb = $(".cukder > img").attr('src')
-                list_date =  $(".kategoz").text().replace(`Posted by aoichi`, "").replace(`   `, "");
                 list_episode_title = $(el).text()
                 list_episode_endpoint = $(el).attr("value").replace(`${baseUrl}/episode/`, "").replace("/", "")
                 list_judul = list_episode_endpoint.replace(/-/g, " ")
@@ -319,7 +317,6 @@ const Services = {
                     list_episode_title,
                     list_episode_endpoint,
                     list_judul,
-                    list_date,
                     list_thumb
                 })
             })
