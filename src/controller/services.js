@@ -309,10 +309,10 @@ const Services = {
             obj.list_episode = []
             let list_episode_title, list_episode_endpoint, list_judul, list_thumb
             $("#selectcog > option").each((index, el) => {
-                list_judul = $(".venutama > h1").text()
                 list_thumb = $(".cukder > img").attr('src')
                 list_episode_title = $(el).text()
                 list_episode_endpoint = $(el).attr("value").replace(`${baseUrl}/episode/`, "").replace("/", "")
+                list_judul = list_episode_endpoint.replace("-", " ")
                 obj.list_episode.push({
                     list_episode_title,
                     list_episode_endpoint,
