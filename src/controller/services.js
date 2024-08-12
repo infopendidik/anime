@@ -161,21 +161,24 @@ const Services = {
                 let anime_list = []
                 let title, endpoint, kop
                 
-                element.find(".barispenz").each((index, el) => {
-                    kop = $(el).find("a").text() 
-                    kop_list.push({
-                        kop
-                    })
-                })
-    
-                element.find(".jdlbar").each((index, el) => {
-                    title = $(el).find("a").text() || null
-                    endpoint = $(el).find("a").attr("href").replace(`${baseUrl}/anime/`, "")
-    
-                    anime_list.push({
-                        title,
-                        endpoint
-                    })
+                element.each((index, el) => {
+                    $(el).find(".barispenz").each((index, el) => {
+                        kop = $(el).find("a").text() 
+                        kop_list.push({
+                            kop
+                        })
+                    });
+
+                    $(el).find(".jdlbar").each((index, el) => {
+                        title = $(el).find("a").text() || null
+                        endpoint = $(el).find("a").attr("href").replace(`${baseUrl}/anime/`, "")
+        
+                        anime_list.push({
+                            title,
+                            endpoint
+                        })
+                    });
+                    
                 })
     
                 // filter null title
