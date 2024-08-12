@@ -164,7 +164,7 @@ const Services = {
                 
                 element.find(".barispenz").each((index, el) => {
                     kop = $(el).find("a").text() 
-                    anime_list.push({
+                    kop_list.push({
                         kop
                     })
                 })
