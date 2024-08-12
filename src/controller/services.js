@@ -150,7 +150,7 @@ const Services = {
             });
         }
     },
-    getAnimeList: async (req, res) => {
+ getAnimeList: async (req, res) => {
         let url = `${baseUrl}/anime-list/`
         try {
             const response = await services.fetchService(url, res)
@@ -161,10 +161,7 @@ const Services = {
                 let title, endpoint, kop_list
                 
                 element.each((index, el) => {
-                    $(el).find(".barispenz").each((index, el) => {
-                        kop_list = $(el).find("a").text() 
-                    });
-
+                    kop_list = $(el).find(".barispenz a").text()
                     $(el).find(".jdlbar").each((index, el) => {
                         title = $(el).find("a").text() || null
                         endpoint = $(el).find("a").attr("href").replace(`${baseUrl}/anime/`, "")
@@ -184,13 +181,11 @@ const Services = {
                 return res.status(200).json({
                     status: true,
                     message: "success",
-                    anime_list: datas,
-                    kop_list: kop_list
+                    anime_list: datas
                 })
             }
             return res.send({
                 message: response.status,
-                kop_list: [],
                 anime_list: [],
             });
         } catch (error) {
@@ -198,7 +193,6 @@ const Services = {
             res.send({
                 status: false,
                 message: error,
-                kop_list: [],
                 anime_list: [],
             });
         }
