@@ -156,29 +156,28 @@ const Services = {
             const response = await services.fetchService(url, res)
             if (response.status === 200) {
                 const $ = cheerio.load(response.data)
-                const element = $("#daftarkartun")
+                const element = $("#abtext")
                 let anime_list = []
                 let kop, title, endpoint
     
-                element.find("#abtext").each((index, el) => {
+                element.each((index, el) => {
                     title = $(el).find("a").text() || null
                     kop = $(el).find(".barispenz").text() 
                     endpoint = $(el).find("a").attr("href").replace(`${baseUrl}/anime/`, "")
     
-                    anime_list.push({
-                        kop,
-                        title,
-                        endpoint
-                    })
+                    if (title) {
+                        anime_list.push({
+                            kop,
+                            title,
+                            endpoint
+                        })
+                    }
                 })
-    
-                // filter null title
-                const datas = anime_list.filter((value) => value.title !== null)
     
                 return res.status(200).json({
                     status: true,
                     message: "success",
-                    anime_list: datas
+                    anime_list: anime_list
                 })
             }
             return res.send({
