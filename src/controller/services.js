@@ -164,8 +164,8 @@ const Services = {
                    
                     $(el).find("#abtext").each((index, el) => {
                         kop_list = $(el).find(".jdlbar .barispenz a").text()  || null
-                        title = $(el).find(".jdlbar a").text() || null
-                        endpoint = $(el).find(".jdlbar a").attr("href").replace(`${baseUrl}/anime/`, "")
+                        title = $(el).find(".jdlbar li a").text() || null
+                        endpoint = $(el).find(".jdlbar li a").attr("href").replace(`${baseUrl}/anime/`, "")
         
                         anime_list.push({
                             kop_list: kop_list,
