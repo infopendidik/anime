@@ -162,7 +162,7 @@ const Services = {
     
                 element.find(".bariskelom").each((index, el) => {
                     kop = $(el).find(".barispenz  a").text() 
-                    title = $(el).find(".penzbar .jdlbar li a").text() 
+                    title = $(el).find(".barispenz .penzbar .jdlbar li a").text() 
                     endpoint = $(el).find("li a").attr("href").replace(`${baseUrl}/anime/`, "").replace("/", "")
     
                     anime_list.push({
