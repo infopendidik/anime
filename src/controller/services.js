@@ -160,24 +160,25 @@ const Services = {
                 let anime_list = []
                 let kop, title, endpoint
     
-                element.each((index, el) => {
+                element.find(".jdlbar").each((index, el) => {
                     title = $(el).find("a").text() || null
                     kop = $(el).find(".barispenz").text() 
                     endpoint = $(el).find("a").attr("href").replace(`${baseUrl}/anime/`, "")
     
-                    if (title) {
-                        anime_list.push({
-                            kop,
-                            title,
-                            endpoint
-                        })
-                    }
+                    anime_list.push({
+                        kop,
+                        title,
+                        endpoint
+                    })
                 })
+    
+                // filter null title
+                const datas = anime_list.filter((value) => value.title !== null)
     
                 return res.status(200).json({
                     status: true,
                     message: "success",
-                    anime_list: anime_list
+                    anime_list: datas
                 })
             }
             return res.send({
