@@ -475,11 +475,13 @@ const Services = {
                         sinopsis
                     })
                 })
-                return res.status(200).json({
+                 return res.status(200).json({
                     status: true,
                     message: "success",
-                    genreAnime
+                    genreAnime,
+                    currentPage: page
                 })
+                
             }
             return res.send({
                 message: response.status,
@@ -493,6 +495,7 @@ const Services = {
                 genreAnime: []
             })
         }
+        
     }
 }
 
