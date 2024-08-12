@@ -158,13 +158,15 @@ const Services = {
                 const $ = cheerio.load(response.data)
                 const element = $("#abtext")
                 let anime_list = []
-                let title, endpoint
+                let kop, title, endpoint
     
                 element.find(".jdlbar").each((index, el) => {
                     title = $(el).find("a").text() || null
+                    kop = $(el).find(".barispenz").text() 
                     endpoint = $(el).find("a").attr("href").replace(`${baseUrl}/anime/`, "")
     
                     anime_list.push({
+                        kop,
                         title,
                         endpoint
                     })
