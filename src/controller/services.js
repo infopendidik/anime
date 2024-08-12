@@ -156,7 +156,7 @@ const Services = {
             const response = await services.fetchService(url, res)
             if (response.status === 200) {
                 const $ = cheerio.load(response.data)
-                const element = $(".daftarkartun  #abtext")
+                const element = $("#abtext")
                 let anime_list = []
                 let kop, title, endpoint
     
