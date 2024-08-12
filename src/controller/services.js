@@ -157,7 +157,6 @@ const Services = {
             if (response.status === 200) {
                 const $ = cheerio.load(response.data)
                 const element = $("#abtext")
-                const kop_list = $(".bariskelom")
                 let kop_list = []
                 let anime_list = []
                 let title, endpoint, kop
@@ -185,11 +184,13 @@ const Services = {
                 return res.status(200).json({
                     status: true,
                     message: "success",
-                    anime_list: datas
+                    anime_list: datas,
+                    kop_list: kop_list
                 })
             }
             return res.send({
                 message: response.status,
+                kop_list: [],
                 anime_list: [],
             });
         } catch (error) {
@@ -197,6 +198,7 @@ const Services = {
             res.send({
                 status: false,
                 message: error,
+                kop_list: [],
                 anime_list: [],
             });
         }
