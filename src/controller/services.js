@@ -470,6 +470,7 @@ const Services = {
                         episode,
                         rating,
                         thumb,
+                        season,
                         genre,
                         sinopsis
                     })
