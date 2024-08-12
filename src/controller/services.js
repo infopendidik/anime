@@ -157,16 +157,23 @@ const Services = {
             if (response.status === 200) {
                 const $ = cheerio.load(response.data)
                 const element = $("#abtext")
+                const kop_list = $(".bariskelom")
+                let kop_list = []
                 let anime_list = []
-                let kop, title, endpoint
+                let title, endpoint, kop
+                
+                element.find(".barispenz").each((index, el) => {
+                    kop = $(el).find("a").text() 
+                    anime_list.push({
+                        kop
+                    })
+                })
     
-                element.find(".bariskelom").each((index, el) => {
-                    kop = $(el).find(".barispenz  a").text() 
-                    title = $(el).find(".barispenz .penzbar .jdlbar li a").text() 
-                    endpoint = $(el).find("li a").attr("href").replace(`${baseUrl}/anime/`, "").replace("/", "")
+                element.find(".jdlbar").each((index, el) => {
+                    title = $(el).find("a").text() || null
+                    endpoint = $(el).find("a").attr("href").replace(`${baseUrl}/anime/`, "")
     
                     anime_list.push({
-                        kop,
                         title,
                         endpoint
                     })
