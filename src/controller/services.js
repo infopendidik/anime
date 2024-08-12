@@ -156,11 +156,11 @@ const Services = {
             const response = await services.fetchService(url, res)
             if (response.status === 200) {
                 const $ = cheerio.load(response.data)
-                const element = $("#abtext")
+                const element = $("#daftarkartun")
                 let anime_list = []
                 let kop, title, endpoint
     
-                element.find(".daftarkartun").each((index, el) => {
+                element.find("#abtext").each((index, el) => {
                     title = $(el).find("a").text() || null
                     kop = $(el).find(".barispenz").text() 
                     endpoint = $(el).find("a").attr("href").replace(`${baseUrl}/anime/`, "")
