@@ -150,30 +150,24 @@ const Services = {
             });
         }
     },
- getAnimeList: async (req, res) => {
+   getAnimeList: async (req, res) => {
         let url = `${baseUrl}/anime-list/`
         try {
             const response = await services.fetchService(url, res)
             if (response.status === 200) {
                 const $ = cheerio.load(response.data)
-                const element = $(".daftarkartun")
+                const element = $("#abtext")
                 let anime_list = []
-                let title, endpoint, kop_list
-                
-                element.each((index, el) => {
-                   
-                    $(el).find("#abtext").each((index, el) => {
-                        kop_list = $(el).find(".jdlbar .barispenz a").text()  || null
-                        title = $(el).find(".jdlbar li a").text() || null
-                        endpoint = $(el).find(".jdlbar li a").attr("href").replace(`${baseUrl}/anime/`, "")
-        
-                        anime_list.push({
-                            kop_list: kop_list,
-                            title: title,
-                            endpoint: endpoint
-                        })
-                    });
-                    
+                let title, endpoint
+    
+                element.find(".jdlbar").each((index, el) => {
+                    title = $(el).find("a").text() || null
+                    endpoint = $(el).find("a").attr("href").replace(`${baseUrl}/anime/`, "")
+    
+                    anime_list.push({
+                        title,
+                        endpoint
+                    })
                 })
     
                 // filter null title
