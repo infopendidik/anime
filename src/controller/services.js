@@ -160,7 +160,7 @@ const Services = {
                 let anime_list = []
                 let kop, title, endpoint
     
-                element.find("#abtext").each((index, el) => {
+                element.find(".daftarkartun").each((index, el) => {
                     title = $(el).find("a").text() || null
                     kop = $(el).find(".barispenz").text() 
                     endpoint = $(el).find("a").attr("href").replace(`${baseUrl}/anime/`, "")
