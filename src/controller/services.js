@@ -376,12 +376,12 @@ const Services = {
             let streaming3 = [];
            
 
-            $('#embed_holder > div.mirrorstream > ul.m360p > li').each((k, v) => {               
+           $('#embed_holder > div.mirrorstream > ul.m360p > li').each((k, v) => {               
                 let driver = $(v).text()
 
                 streaming1.push({
                     driver: driver,
-                    link: "/api/v1/streaming/" + $(v).find('a').data().content
+                    link: HTTP_HOST + "/api/v1/streaming/" + $(v).find('a').data().content
                 });
             })
 
@@ -390,7 +390,7 @@ const Services = {
 
                 streaming2.push({
                     driver: driver,
-                    link: "/api/v1/streaming/" + $(v).find('a').data().content
+                    link: HTTP_HOST +"/api/v1/streaming/" + $(v).find('a').data().content
                     
                 });
                 
@@ -401,7 +401,7 @@ const Services = {
 
                 streaming3.push({
                     driver: driver,
-                    link: "/api/v1/streaming/" + $(v).find('a').data().content
+                    link: HTTP_HOST +"/api/v1/streaming/" + $(v).find('a').data().content
                 });
             })
 
