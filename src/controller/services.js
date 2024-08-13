@@ -4,6 +4,52 @@ const baseUrl = require("../constant/url")
 const episodeHelper = require("../helper/episodeHelper")
 
 const Services = {
+    getHome: async (req, res) => {
+        const page = req.params.page;
+        let url = page === 1 ? `${baseUrl}` : `${baseUrl}/page/${page}/`;
+        try {
+            const response = await services.fetchService(url, res);
+            if (response.status === 200) {
+                const $ = cheerio.load(response.data);
+                const element = $(".excstf");
+                let home = [];
+                let title, thumb, total_episode, type, endpoint;
+
+                element.find("article > .bsx").each((index, el) => {
+                    title = $(el).find(".tt h2").text();
+                    thumb = $(el).find(".limit > img").attr("data-src");
+                    total_episode = $(el).find(".bt span.epx").text();
+                    type = $(el).find(".typez").text();
+                    endpoint = $(el).find("a").attr("href").replace(`${baseUrl}/`, "").replace("/", "").replace("/", "");
+
+                    home.push({
+                        title,
+                        thumb,
+                        total_episode,
+                        type,
+                        endpoint,
+                    });
+                });
+                return res.status(200).json({
+                    status: true,
+                    message: "success",
+                    home,
+                    currentPage: page
+                });
+            }
+            return res.status(response.status).json({
+                message: response.status,
+                home: [],
+            });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({
+                status: false,
+                message: error,
+                home: [],
+            });
+        }
+    },
     getOngoing: async (req, res) => {
         const page = req.params.page
         let url = page === 1 ? `${baseUrl}/ongoing-anime/` : `${baseUrl}/ongoing-anime/page/${page}/`
@@ -150,42 +196,39 @@ const Services = {
             });
         }
     },
-   getAnimeList: async (req, res) => {
+    getAnimeList: async (req, res) => {
         let url = `${baseUrl}/anime-list/`
         try {
             const response = await services.fetchService(url, res)
             if (response.status === 200) {
                 const $ = cheerio.load(response.data)
-                const element = $(".daftarkartun")
+                const element = $("#abtext")
                 let anime_list = []
-                let kop, title, endpoint
+                let title, endpoint
     
-                element.find("#abtext").each((index, el) => {
-                    kop = $(el).find(".barispenz a").attr("name") || null
-                    title = $(el).find(".jdlbar li a").text() || null
-                    endpoint = $(el).find(".jdlbar li a").attr("href").replace(`${baseUrl}/anime/`, "").replace("/", "")
+                element.find(".jdlbar").each((index, el) => {
+                    title = $(el).find("a").text() || null
+                    endpoint = $(el).find("a").attr("href").replace(`${baseUrl}/anime/`, "")
     
                     anime_list.push({
-                        kop,
                         title,
                         endpoint
                     })
                 })
     
-                // filter null title and kop
-                const datas = anime_list.filter((value) => value.title !== null && value.kop !== null)
+                // filter null title
+                const datas = anime_list.filter((value) => value.title !== null)
     
                 return res.status(200).json({
                     status: true,
                     message: "success",
                     anime_list: datas
                 })
-            } else {
-                return res.send({
-                    message: response.status,
-                    anime_list: [],
-                });
             }
+            return res.send({
+                message: response.status,
+                anime_list: [],
+            });
         } catch (error) {
             console.log(error);
             res.send({
@@ -473,18 +516,15 @@ const Services = {
                         episode,
                         rating,
                         thumb,
-                        season,
                         genre,
                         sinopsis
                     })
                 })
-                 return res.status(200).json({
+                return res.status(200).json({
                     status: true,
                     message: "success",
-                    genreAnime,
-                    currentPage: page
+                    genreAnime
                 })
-                
             }
             return res.send({
                 message: response.status,
@@ -498,7 +538,6 @@ const Services = {
                 genreAnime: []
             })
         }
-        
     }
 }
 
