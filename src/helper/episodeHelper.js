@@ -159,16 +159,15 @@ const episodeHelper = {
         });
         return response;
       },
-    listAnimeQualityFunction: (num, res) => {
+    listAnimeQualityFunction: (res) => {
         const $ = cheerio.load(res);
         const element = $("#abtext");
         const download_links = [];
         let response;
         element.find(".jdlbar").filter(function () {
-            const abjad = $(this).find(".barispenz").eq(num).attr("name").text();
+            const abjad = $(this).find(".barispenz").attr("name").text();
             $(this)
             .find(".barispenz")
-            .eq(num)
             .find("a")
             .each(function () {
               const _list = {
