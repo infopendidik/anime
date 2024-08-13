@@ -381,7 +381,7 @@ const Services = {
 
                 streaming1.push({
                     driver: driver,
-                    link: $_SERVER[HOSTNAME] + "/api/v1/streaming/" + $(v).find('a').data().content
+                    link: "/api/v1/streaming/" + $(v).find('a').data().content
                 });
             })
 
@@ -390,7 +390,7 @@ const Services = {
 
                 streaming2.push({
                     driver: driver,
-                    link: $_SERVER[HOSTNAME] +"/api/v1/streaming/" + $(v).find('a').data().content
+                    link: "/api/v1/streaming/" + $(v).find('a').data().content
                     
                 });
                 
@@ -401,7 +401,7 @@ const Services = {
 
                 streaming3.push({
                     driver: driver,
-                    link: $_SERVER[HOSTNAME] +"/api/v1/streaming/" + $(v).find('a').data().content
+                    link: "/api/v1/streaming/" + $(v).find('a').data().content
                 });
             })
 
