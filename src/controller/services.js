@@ -376,32 +376,35 @@ const Services = {
             let streaming3 = [];
            
 
-          $('#embed_holder > div.mirrorstream > ul.m360p > li').each((index, element) => {               
-                let driver = $(element).text().trim();
+                      $('#embed_holder > div.mirrorstream > ul.m360p > li').each((k, v) => {               
+                let driver = $(v).text()
 
                 streaming1.push({
                     driver: driver,
-                    link: $_SERVER[HOSTNAME] + "/api/v1/streaming/" + $(element).find('a').data('content')
+                    link: $_SERVER[HOSTNAME] + "/api/v1/streaming/" + $(v).find('a').data().content
                 });
-            });
+            })
 
-            $('.mirrorstream > .m480p > li').each((index, element) => {               
-                let driver = $(element).text().trim();
+            $('.mirrorstream > .m480p > li').each((k, v) => {               
+                let driver = $(v).text()
 
                 streaming2.push({
                     driver: driver,
-                    link: $_SERVER[HOSTNAME] + "/api/v1/streaming/" + $(element).find('a').data('content')
+                    link: $_SERVER[HOSTNAME] +"/api/v1/streaming/" + $(v).find('a').data().content
+                    
                 });
-            });
+                
+            })
 
-            $('.mirrorstream > .m720p > li').each((index, element) => {               
-                let driver = $(element).text().trim();
+            $('.mirrorstream > .m720p > li').each((k, v) => {               
+                let driver = $(v).text()
 
                 streaming3.push({
                     driver: driver,
-                    link: $_SERVER[HOSTNAME] + "/api/v1/streaming/" + $(element).find('a').data('content')
+                    link: $_SERVER[HOSTNAME] +"/api/v1/streaming/" + $(v).find('a').data().content
                 });
-            });
+            })
+
 
 
             obj.mirror_embed1 = { quality: '360p', streaming: streaming1 }; // Perbaikan: Mengubah 'straming' menjadi 'streaming'
