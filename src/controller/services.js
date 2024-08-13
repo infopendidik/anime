@@ -345,7 +345,7 @@ const Services = {
             let link_ref, title_ref;
             $(".flir > a").each((index, el) => {
                 title_ref = $(el).text();
-                link_ref = $(el).attr("href").replace(`${baseUrl}/anime/`, "").replace(`${baseUrl}/episode/`, "").replace("/", "");
+                link_ref = $(el).attr("href").replace(new RegExp(`${baseUrl}/genres/`, 'g'), "");
                 obj.relative.push({
                     title_ref,
                     link_ref
