@@ -165,7 +165,7 @@ const episodeHelper = {
         const download_links = [];
         let response;
         element.find(".jdlbar").filter(function () {
-            const abjad = $(this).find(".barispenz a").eq(num).attr("name").text();
+            const abjad = $(this).find(".barispenz").eq(num).attr("name").text();
             $(this)
             .find(".barispenz")
             .eq(num)
