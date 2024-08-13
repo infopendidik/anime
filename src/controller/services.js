@@ -156,15 +156,17 @@ const Services = {
             const response = await services.fetchService(url, res)
             if (response.status === 200) {
                 const $ = cheerio.load(response.data)
-                const element = $("#abtext")
+                const element = $(".daftarkartun")
                 let anime_list = []
-                let title, endpoint
+                let kop, title, endpoint
     
-                element.find(".jdlbar").each((index, el) => {
-                    title = $(el).find("a").text() || null
-                    endpoint = $(el).find("a").attr("href").replace(`${baseUrl}/anime/`, "").replace("/", "")
+                element.find("#abtext").each((index, el) => {
+                    kop = $(el).find(".barispenz > a").attr("name") || null
+                    title = $(el).find(".jdlbar > a").text() || null
+                    endpoint = $(el).find(".jdlbar a").attr("href").replace(`${baseUrl}/anime/`, "").replace("/", "")
     
                     anime_list.push({
+                        kop,
                         title,
                         endpoint
                     })
