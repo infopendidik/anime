@@ -161,13 +161,13 @@ const episodeHelper = {
       },
     listAnimeQualityFunction: (res) => {
         const $ = cheerio.load(res);
-        const element = $("#abtext");
+        const element = $(".daftarkartun");
         const download_links = [];
         let response;
-        element.find(".jdlbar").filter(function () {
+        element.find("#abtext").filter(function () {
             const abjad = $(this).find(".barispenz").attr("name").text();
             $(this)
-            .find(".barispenz")
+            .find(".jdlbar")
             .find("a")
             .each(function () {
               const _list = {
