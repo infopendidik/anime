@@ -197,47 +197,28 @@ const Services = {
         }
     },
     getAnimeList: async (req, res) => {
-        let url = `${baseUrl}/anime-list/`
+        const endpoint = req.params.endpoint;
+        const fullUrl = `${baseUrl}/anime-list/`;
+        console.log(fullUrl);
         try {
-            const response = await services.fetchService(url, res)
-            if (response.status === 200) {
-                const $ = cheerio.load(response.data)
-                const element = $("#abtext")
-                let anime_list = []
-                let title, endpoint
-    
-                element.find(".jdlbar").each((index, el) => {
-                    title = $(el).find("a").text() || null
-                    endpoint = $(el).find("a").attr("href").replace(`${baseUrl}/anime/`, "")
-    
-                    anime_list.push({
-                        title,
-                        endpoint
-                    })
-                })
-    
-                // filter null title
-                const datas = anime_list.filter((value) => value.title !== null)
-    
-                return res.status(200).json({
-                    status: true,
-                    message: "success",
-                    anime_list: datas
-                })
-            }
-            return res.send({
-                message: response.status,
-                anime_list: [],
+            const response = await services.fetchService(fullUrl, res)
+            const $ = cheerio.load(response.data);
+            const anime_list = {};
+            anime_list.title = $(".batchlink > h4").text();
+            anime_list.status = "success";
+            anime_list.baseUrl = fullUrl;
+            let abjad  = episodeHelper.listAnimeQualityFunction(0, response.data);
+            anime_list.download_list = { abjad };
+            res.send({
+                status: true,
+                message: "succes",
+                anime_list
             });
         } catch (error) {
-            console.log(error);
-            res.send({
-                status: false,
-                message: error,
-                anime_list: [],
-            });
+            console.log(error)
         }
     },
+    
     getAnimeDetail: async (req, res) => {
         const endpoint = req.params.endpoint
         let url = `${baseUrl}/anime/${endpoint}/`
