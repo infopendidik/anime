@@ -164,7 +164,7 @@ const episodeHelper = {
         const element = $(".daftarkartun");
         const download_links = [];
         let response;
-        element.find("#abtext").filter(function () {
+        element.find("#abtext").each(function () {
             const abjad = $(this).find(".barispenz").attr("name").text();
             $(this)
             .find(".jdlbar")
