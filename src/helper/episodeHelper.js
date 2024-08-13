@@ -158,6 +158,28 @@ const episodeHelper = {
             });
         });
         return response;
+      },
+     listAnimeQualityFunction: (num, res) => {
+        const $ = cheerio.load(res);
+        const element = $("#abtext");
+        const download_links = [];
+        let response;
+        element.find(".jdlbar").filter(function () {
+          const abjad = $(this).find(".barispenz").eq(num).find("name").text();
+           $(this)
+            .find(".barispenz")
+            .eq(num)
+            .find("a")
+            .each(function () {
+              const _list = {
+                host: $(this).text(),
+                link: $(this).attr("href"),
+              };
+              download_links.push(_list);
+              response = { abjad, download_links };
+            });
+        });
+        return response;
       }
 }
 
