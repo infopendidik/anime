@@ -172,19 +172,20 @@ const Services = {
                     })
                 })
     
-                // filter null title
-                const datas = anime_list.filter((value) => value.title !== null)
+                // filter null title and kop
+                const datas = anime_list.filter((value) => value.title !== null && value.kop !== null)
     
                 return res.status(200).json({
                     status: true,
                     message: "success",
                     anime_list: datas
                 })
+            } else {
+                return res.send({
+                    message: response.status,
+                    anime_list: [],
+                });
             }
-            return res.send({
-                message: response.status,
-                anime_list: [],
-            });
         } catch (error) {
             console.log(error);
             res.send({
