@@ -271,7 +271,7 @@ const Services = {
     
                 episodeElement.find("li").each((index, el) => {
                     episode_title = $(el).find("span > a").text()
-                    episode_endpoint = $(el).find("span > a").attr("href").replace(`${baseUrl}`, "").replace("/", "")
+                    episode_endpoint = $(el).find("span > a").attr("href").replace(`${baseUrl}`, "")
                     episode_date = $(el).find(".zeebr").text()
     
                     episode_list.push({
