@@ -196,26 +196,38 @@ const Services = {
             });
         }
     },
-    getAnimeList: async (req, res) => {
+   getAnimeList: async (req, res) => {
         const endpoint = req.params.endpoint;
         const fullUrl = `${baseUrl}/anime-list/`;
         console.log(fullUrl);
         try {
             const response = await services.fetchService(fullUrl, res)
-            const $ = cheerio.load(response.data);
-            const anime_list = {};
-            anime_list.title = $(".batchlink > h4").text();
-            anime_list.status = "success";
-            anime_list.baseUrl = fullUrl;
-            let abjad  = episodeHelper.listAnimeQualityFunction(0, response.data);
-            anime_list.download_list = { abjad };
-            res.send({
-                status: true,
-                message: "succes",
-                anime_list
-            });
+            if (response.status === 200) {
+                const $ = cheerio.load(response.data);
+                const anime_list = {};
+                anime_list.title = $(".batchlink > h4").text();
+                anime_list.status = "success";
+                anime_list.baseUrl = fullUrl;
+                let abjad  = episodeHelper.listAnimeQualityFunction(0, response.data);
+                anime_list.download_list = { abjad };
+                res.status(200).json({
+                    status: true,
+                    message: "success",
+                    anime_list
+                });
+            } else {
+                res.status(response.status).send({
+                    message: response.status,
+                    anime_list: {}
+                });
+            }
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            res.status(500).json({
+                status: false,
+                message: error,
+                anime_list: {}
+            });
         }
     },
     
