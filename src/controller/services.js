@@ -385,7 +385,7 @@ const Services = {
                 });
             })
 
-            $('.mirrorstream > .m480p > li').each(async(k, v) => {               
+            $('.mirrorstream > .m480p > li').each((k, v) => {               
                 let driver = $(v).text()
 
                 streaming2.push({
@@ -396,7 +396,7 @@ const Services = {
                 
             })
 
-            $('.mirrorstream > .m720p > li').each(async(k, v) => {               
+            $('.mirrorstream > .m720p > li').each((k, v) => {               
                 let driver = $(v).text()
 
                 streaming3.push({
