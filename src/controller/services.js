@@ -433,12 +433,12 @@ const Services = {
         const fullUrl = `${baseUrl}/batch/${endpoint}`;
         console.log(fullUrl);
         try {
-            const response = await services.fetchService(fullUrl, res)
+            const response = await services.fetchService(fullUrl, res);
             const $ = cheerio.load(response.data);
             const batch = {};
             batch.title = $(".batchlink > h4").text();
             batch.thumb = $(".separator > img").attr("src");
-            batch.infos = $(".infos").html().replace(`${baseUrl}/genres/`, "genres/");
+            batch.infos = $(".infos").replace(`${baseUrl}/genres/`, "genres/").html();
             batch.sinopsis = $(".deskripsi").text();
             batch.status = "success";
             batch.baseUrl = fullUrl;
@@ -448,11 +448,11 @@ const Services = {
             batch.download_list = { low_quality, medium_quality, high_quality };
             res.send({
                 status: true,
-                message: "succes",
+                message: "success",
                 batch
             });
         } catch (error) {
-            console.log(error)
+            console.error(error);
         }
     },
     getGenreList: async (req, res) => {
