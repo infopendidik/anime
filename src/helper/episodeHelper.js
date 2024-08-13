@@ -165,15 +165,14 @@ const episodeHelper = {
         const download_links = [];
         let response;
         element.find(".jdlbar").filter(function () {
-          const abjad = $(this).find(".barispenz").eq(num).find("name").text();
+          const abjad = $(this).find(".barispenz").find("name").text();
            $(this)
-            .find(".barispenz")
-            .eq(num)
+            .find(".jdlbar")
             .find("a")
             .each(function () {
               const _list = {
-                host: $(this).text(),
-                link: $(this).attr("href"),
+                host: $(this).find("a").text(),
+                link: $(this).find("a").attr("href").replace(`${baseUrl}/anime/`, ""),
               };
               download_links.push(_list);
               response = { abjad, download_links };
