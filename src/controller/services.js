@@ -439,6 +439,7 @@ const Services = {
             batch.title = $(".batchlink > h4").text();
             batch.thumb = $(".separator > img").attr("src");
             batch.infos = $(".infos").text();
+            batch.sinopsis = $(".deskripsi").text();
             batch.status = "success";
             batch.baseUrl = fullUrl;
             let low_quality = episodeHelper.batchQualityFunction(0, response.data);
