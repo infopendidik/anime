@@ -1,11 +1,11 @@
-const express = require("express");
-const router = express.Router();
-const Services = require("../controller/services");
+const router = require("express").Router()
+const route = router
+const Services = require("../controller/services")
 
-router.get("/", (req, res) => {
-    res.json({
+
+route.get("/", (req, res) => {
+    res.send({
         endpoint: {
-            
             getOngoingAnime: "/api/v1/ongoing/:page",
             getCompletedAnime: "/api/v1/completed/:page",
             getAnimeSearch: "/api/v1/search/:q",
@@ -16,29 +16,29 @@ router.get("/", (req, res) => {
             getGenreList: "/api/v1/genres",
             getGenrePage: "/api/v1/genres/:genre/:page"
         }
-    });
-});
+    })
+})
 
 
-// Get Ongoing Anime
-router.get("/api/v1/ongoing/:page", Services.getOngoingAnime);
-// Get Completed Anime
-router.get("/api/v1/completed/:page", Services.getCompletedAnime);
-// Get Search Anime
-router.get("/api/v1/search/:q", Services.getAnimeSearch);
-// Get Anime List
-router.get("/api/v1/anime-list", Services.getAnimeList);
-// Get Anime Detail
-router.get("/api/v1/detail/:endpoint", Services.getAnimeDetail);
-// Get Anime Episode
-router.get("/api/v1/episode/:endpoint", Services.getAnimeEpisode);
-// Get Batch Link
-router.get("/api/v1/batch/:endpoint", Services.getBatchLink);
-// Get Genre List
-router.get("/api/v1/genres", Services.getGenreList);
-// Get Genre Page
-router.get("/api/v1/genres/:genre/:page", Services.getGenrePage);
-// Get Embed Streaming
-router.get("/api/v1/streaming/:content", Services.getEmbedStreaming);
+// Get Ongoing Anime -Done-
+router.get("/api/v1/ongoing/:page", Services.getOngoing)
+// Get Completed Anime -Done-
+router.get("/api/v1/completed/:page", Services.getCompleted)
+// Get Search Anime -Done-
+router.get("/api/v1/search/:q", Services.getSearch)
+// Get Anime List -Done-
+router.get("/api/v1/anime-list", Services.getAnimeList)
+// Get Anime Detail -Done-  
+route.get("/api/v1/detail/:endpoint", Services.getAnimeDetail)
+// Get Anime Episode -Done-
+router.get("/api/v1/episode/:endpoint", Services.getAnimeEpisode)
+// Get Batch Link -Done-
+router.get("/api/v1/batch/:endpoint", Services.getBatchLink)
+// Get Genre List -Done-
+router.get("/api/v1/genres", Services.getGenreList) 
+// Get Genre Page -Done-
+router.get("/api/v1/genres/:genre/:page", Services.getGenrePage)
+// Get EMbed Streaming 
+router.get("/api/v1/streaming/:content", Services.getEmbedByContent)
 
-module.exports = router;
+module.exports = route
