@@ -5,7 +5,7 @@ const Services = require("../controller/services");
 router.get("/", (req, res) => {
     res.json({
         endpoint: {
-            getHome: "/api/v1/home/:page",
+            
             getOngoingAnime: "/api/v1/ongoing/:page",
             getCompletedAnime: "/api/v1/completed/:page",
             getAnimeSearch: "/api/v1/search/:q",
@@ -19,8 +19,7 @@ router.get("/", (req, res) => {
     });
 });
 
-// Get Home
-router.get("/api/v1/home/:page", Services.getHome);
+
 // Get Ongoing Anime
 router.get("/api/v1/ongoing/:page", Services.getOngoingAnime);
 // Get Completed Anime
