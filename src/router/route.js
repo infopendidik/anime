@@ -19,7 +19,7 @@ route.get("/", (req, res) => {
             getCompletedDonghua: "/api/v1/donghua/completed/:page",
             getDonghuaList: "/api/v1/donghua-list",
             getDonghuaDetail: "/api/v1/donghua/detail/:endpoint",
-            getDonghuaEpisode: "/api/v1/donghua/episode/:endpoint",
+            getDonghuaEpisode: "/api/v1/donghua/episode/:endpoint"
             
         }
     })
