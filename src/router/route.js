@@ -14,7 +14,13 @@ route.get("/", (req, res) => {
             getAnimeEpisode: "/api/v1/episode/:endpoint",
             getBatchLink: "/api/v1/batch/:endpoint",
             getGenreList: "/api/v1/genres",
-            getGenrePage: "/api/v1/genres/:genre/:page"
+            getGenrePage: "/api/v1/genres/:genre/:page",
+            getOngoingDonghua: "/api/v1/donghua/ongoing/:page",
+            getCompletedDonghua: "/api/v1/donghua/completed/:page",
+            getDonghuaList: "/api/v1/donghua-list",
+            getDonghuaDetail: "/api/v1/donghua/detail/:endpoint",
+            getDonghuaEpisode: "/api/v1/donghua/episode/:endpoint",
+            
         }
     })
 })
@@ -40,5 +46,15 @@ router.get("/api/v1/genres", Services.getGenreList)
 router.get("/api/v1/genres/:genre/:page", Services.getGenrePage)
 // Get EMbed Streaming 
 router.get("/api/v1/streaming/:content", Services.getEmbedByContent)
+// Get Ongoing Donghua -Done-
+router.get("/api/v1/donghua/ongoing/:page", Services.getOngoingDonghua)
+// Get Completed Donghua -Done-
+router.get("/api/v1/completed/:page", Services.getCompletedDonghua)
+// Get Donghua List -Done-
+router.get("/api/v1/donghua-list", Services.getDonghuaList)
+// Get Donghua Detail -Done-  
+route.get("/api/v1/donghua/detail/:endpoint", Services.getDonghuaDetail)
+// Get Donghua Episode -Done-
+router.get("/api/v1/donghua/episode/:endpoint", Services.getDonghuaEpisode)
 
 module.exports = route
