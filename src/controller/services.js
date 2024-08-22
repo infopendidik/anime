@@ -339,7 +339,7 @@ const Services = {
             obj.streamLink = streamElement.find(".responsive-embed-stream > iframe").attr("src");
             obj.desc = [];
             $(".infozingle > p").each((index, el) => {
-                obj.desc.push($(el).html()); // Perbaikan: Menggunakan push untuk menambahkan detail ke dalam array obj.desc
+                obj.desc.push($(el).html().replace(new RegExp(`${baseUrl}`, 'g'), "")); // Perbaikan: Menggunakan push untuk menambahkan detail ke dalam array obj.desc
             });
             obj.relative = [];
             let link_ref, title_ref;
