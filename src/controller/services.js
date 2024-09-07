@@ -376,23 +376,22 @@ const Services = {
             let streaming3 = [];
            
 
-                      $('#embed_holder > div.mirrorstream > ul.m360p > li').each(async (k, v) => {               
+                       $('#embed_holder > div.mirrorstream > ul.m360p > li').each((k, v) => {               
                 let driver = $(v).text();
                 let content = $(v).find('a').data('content');
-                try {
-                    let embedLink = await episodeHelper.getEmbedByContent(content);
+                episodeHelper.getEmbedByContent(content).then(embedLink => {
                     streaming1.push({
                         driver: driver,
                         link: embedLink
                     });
-                } catch (error) {
+                }).catch(error => {
                     console.error('Error fetching embed link:', error);
                     streaming1.push({
                         driver: driver,
                         link: null
                     });
-                }
-            });
+                });
+            })
 
             $('.mirrorstream > .m480p > li').each((k, v) => {               
                 let driver = $(v).text()
