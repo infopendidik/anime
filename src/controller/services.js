@@ -376,11 +376,14 @@ const Services = {
             let streaming3 = [];
            
 
-                         $('#embed_holder > div.mirrorstream > ul.m360p > li').each(async (k, v) => {               
+                           $('#embed_holder > div.mirrorstream > ul.m360p > li').each(async (k, v) => {               
                 let driver = $(v).text();
                 let content = $(v).find('a').data('content');
                 try {
-                    let embedLink = await episodeHelper.getEmbedByContent(content);
+                    let nonce = await episodeHelper.getNonce();
+                    const html_streaming = await episodeHelper.getUrlAjax(content, nonce);
+                    const parse = cheerio.load(html_streaming);
+                    let embedLink = parse('iframe').attr('src');
                     if (embedLink) {
                         streaming1.push({
                             driver: driver,
@@ -400,7 +403,7 @@ const Services = {
                         link: 'Link tidak tersedia'
                     });
                 }
-            });
+            })
 
             $('.mirrorstream > .m480p > li').each((k, v) => {               
                 let driver = $(v).text();
