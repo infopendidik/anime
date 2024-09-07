@@ -376,20 +376,28 @@ const Services = {
             let streaming3 = [];
            
 
-                          $('#embed_holder > div.mirrorstream > ul.m360p > li').each(async (k, v) => {               
+                         $('#embed_holder > div.mirrorstream > ul.m360p > li').each(async (k, v) => {               
                 let driver = $(v).text();
                 let content = $(v).find('a').data('content');
                 try {
                     let embedLink = await episodeHelper.getEmbedByContent(content);
-                    streaming1.push({
-                        driver: driver,
-                        link: embedLink
-                    });
+                    if (embedLink) {
+                        streaming1.push({
+                            driver: driver,
+                            link: embedLink
+                        });
+                    } else {
+                        console.error('Embed link not found for content:', content);
+                        streaming1.push({
+                            driver: driver,
+                            link: 'Link tidak tersedia'
+                        });
+                    }
                 } catch (error) {
                     console.error('Error fetching embed link:', error);
                     streaming1.push({
                         driver: driver,
-                        link: null
+                        link: 'Link tidak tersedia'
                     });
                 }
             });
