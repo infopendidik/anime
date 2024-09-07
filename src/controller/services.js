@@ -378,9 +378,9 @@ const Services = {
 
                       $('#embed_holder > div.mirrorstream > ul.m360p > li').each(async (k, v) => {               
                 let driver = $(v).text();
-                let embedContent = $(v).find('a').data('content');
+                let content = $(v).find('a').data('content');
                 try {
-                    let embedLink = await episodeHelper.getEmbedByContent(embedContent);
+                    let embedLink = await episodeHelper.getEmbedByContent(content);
                     streaming1.push({
                         driver: driver,
                         link: embedLink
