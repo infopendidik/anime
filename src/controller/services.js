@@ -376,15 +376,20 @@ const Services = {
             let streaming3 = [];
            
 
-                      $('#embed_holder > div.mirrorstream > ul.m360p > li').each((k, v) => {               
-                let driver = $(v).text()
+                       $('#embed_holder > div.mirrorstream > ul.m360p > li').each(async (k, v) => {               
+                let driver = $(v).text();
+                let content = req.params.content;
+                let nonce = await episodeHelper.getNonce();
+                const html_streaming = await episodeHelper.getUrlAjax(content, nonce);
+                const parse = cheerio.load(html_streaming);
+                const link = parse('iframe').attr('src');
 
                 streaming1.push({
                     driver: driver,
-                    link: "api/v1/streaming/" + $(v).find('a').data().content
+                    link: "api/v1/streaming/" + $(v).find('a').data().content,
+                    streaming_url: link
                 });
             })
-
             $('.mirrorstream > .m480p > li').each((k, v) => {               
                 let driver = $(v).text()
 
