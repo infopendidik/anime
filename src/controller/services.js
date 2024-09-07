@@ -376,46 +376,45 @@ const Services = {
             let streaming3 = [];
            
 
-                       $('#embed_holder > div.mirrorstream > ul.m360p > li').each((k, v) => {               
+                          $('#embed_holder > div.mirrorstream > ul.m360p > li').each(async (k, v) => {               
                 let driver = $(v).text();
                 let content = $(v).find('a').data('content');
-                episodeHelper.getEmbedByContent(content).then(embedLink => {
+                try {
+                    let embedLink = await episodeHelper.getEmbedByContent(content);
                     streaming1.push({
                         driver: driver,
                         link: embedLink
                     });
-                }).catch(error => {
+                } catch (error) {
                     console.error('Error fetching embed link:', error);
                     streaming1.push({
                         driver: driver,
                         link: null
                     });
-                });
-            })
+                }
+            });
 
             $('.mirrorstream > .m480p > li').each((k, v) => {               
-                let driver = $(v).text()
+                let driver = $(v).text();
+                let content = $(v).find('a').data('content');
 
                 streaming2.push({
                     driver: driver,
-                    link: "api/v1/streaming/" + $(v).find('a').data().content
-                    
+                    link: `api/v1/streaming/${content}`
                 });
-                
-            })
+            });
 
             $('.mirrorstream > .m720p > li').each((k, v) => {               
-                let driver = $(v).text()
+                let driver = $(v).text();
+                let content = $(v).find('a').data('content');
 
                 streaming3.push({
                     driver: driver,
-                    link: "api/v1/streaming/" + $(v).find('a').data().content
+                    link: `api/v1/streaming/${content}`
                 });
-            })
+            });
 
-
-
-            obj.mirror_embed1 = { quality: '360p', streaming: streaming1 }; // Perbaikan: Mengubah 'straming' menjadi 'streaming'
+            obj.mirror_embed1 = { quality: '360p', streaming: streaming1 };
             obj.mirror_embed2 = { quality: '480p', streaming: streaming2 };
             obj.mirror_embed3 = { quality: '720p', streaming: streaming3 };
 
