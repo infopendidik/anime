@@ -375,59 +375,46 @@ const Services = {
             let streaming2 = [];
             let streaming3 = [];
            
+const processStream = async (quality, streamingArray) => {
+                          const elements = $(`#embed_holder > div.mirrorstream > ul.${quality} > li`);
+                          for (let i = 0; i < elements.length; i++) {
+                              let driver = $(elements[i]).text();
+                              let content = $(elements[i]).find('a').data('content');
+                              try {
+                                  let nonce = await episodeHelper.getNonce();
+                                  const html_streaming = await episodeHelper.getUrlAjax(content, nonce);
+                                  const parse = cheerio.load(html_streaming);
+                                  let embedLink = parse('iframe').attr('src');
+                                  if (embedLink) {
+                                      streamingArray.push({
+                                          driver: driver,
+                                          link: embedLink
+                                      });
+                                  } else {
+                                      console.error('Embed link not found for content:', content);
+                                      streamingArray.push({
+                                          driver: driver,
+                                          link: 'Link tidak tersedia'
+                                      });
+                                  }
+                              } catch (error) {
+                                  console.error('Error fetching embed link:', error);
+                                  streamingArray.push({
+                                      driver: driver,
+                                      link: 'Link tidak tersedia'
+                                  });
+                              }
+                          }
+                      };
 
-                           $('#embed_holder > div.mirrorstream > ul.m360p > li').each(async (k, v) => {               
-                let driver = $(v).text();
-                let content = $(v).find('a').data('content');
-                try {
-                    let nonce = await episodeHelper.getNonce();
-                    const html_streaming = await episodeHelper.getUrlAjax(content, nonce);
-                    const parse = cheerio.load(html_streaming);
-                    let embedLink = parse('iframe').attr('src');
-                    if (embedLink) {
-                        streaming1.push({
-                            driver: driver,
-                            link: embedLink
-                        });
-                    } else {
-                        console.error('Embed link not found for content:', content);
-                        streaming1.push({
-                            driver: driver,
-                            link: 'Link tidak tersedia'
-                        });
-                    }
-                } catch (error) {
-                    console.error('Error fetching embed link:', error);
-                    streaming1.push({
-                        driver: driver,
-                        link: 'Link tidak tersedia'
-                    });
-                }
-            })
+                      await processStream('m360p', streaming1);
+                      await processStream('m480p', streaming2);
+                      await processStream('m720p', streaming3);
 
-            $('.mirrorstream > .m480p > li').each((k, v) => {               
-                let driver = $(v).text();
-                let content = $(v).find('a').data('content');
+                      obj.mirror_embed1 = { quality: '360p', streaming: streaming1 };
+                      obj.mirror_embed2 = { quality: '480p', streaming: streaming2 };
+                      obj.mirror_embed3 = { quality: '720p', streaming: streaming3 };
 
-                streaming2.push({
-                    driver: driver,
-                    link: `api/v1/streaming/${content}`
-                });
-            });
-
-            $('.mirrorstream > .m720p > li').each((k, v) => {               
-                let driver = $(v).text();
-                let content = $(v).find('a').data('content');
-
-                streaming3.push({
-                    driver: driver,
-                    link: `api/v1/streaming/${content}`
-                });
-            });
-
-            obj.mirror_embed1 = { quality: '360p', streaming: streaming1 };
-            obj.mirror_embed2 = { quality: '480p', streaming: streaming2 };
-            obj.mirror_embed3 = { quality: '720p', streaming: streaming3 };
 
             let low_quality;
             let medium_quality;
