@@ -7,6 +7,10 @@ const userAgents = [
     "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.20.25 (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27",
     "Mozilla/5.0 (Windows; U; Windows NT 6.1; ko-KR) AppleWebKit/533.20.25 (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27"
 ];
+const proxy = {
+    host: '117.54.114.97',
+    port: 80
+};
 
 const Service = {
     fetchService: async (url, res) => {
@@ -15,7 +19,8 @@ const Service = {
             const response = await axios.get(url, {
                 headers: {
                     'User-Agent': userAgent
-                }
+                },
+                proxy: proxy
             });
             return new Promise((resolve, reject) => {
                 if (response.status === 200) {
